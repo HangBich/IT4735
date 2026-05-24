@@ -95,6 +95,8 @@ def get_and_parse_thingspeak_data():
         print(f"Đã xảy ra lỗi khi kết nối mạng: {e}")
 
 if __name__ == "__main__":
+    print("------Phần a------")
+
     # Chạy Cách 1
     send_data_way_1()
     
@@ -105,5 +107,6 @@ if __name__ == "__main__":
     # Chạy Cách 2
     send_data_way_2()
 
+    print("------Phần b------")
     # b) lấy dữ liệu về từ Thingpeak API
     get_and_parse_thingspeak_data()
