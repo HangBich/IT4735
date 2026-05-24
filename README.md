@@ -1,5 +1,5 @@
 # IT4735
-# MÔN HỌC: CÔNG NGHỆ WEB VÀ DỊCH VỤ TRỰC TUYẾN (IT4735)
+# MÔN HỌC: IoT và ứng dụng (IT4735)
 email: [hungpn, thuannd, linhdt]@soict.hust.edu.vn 
 Kho lưu trữ toàn bộ bài tập và dự án môn học IT4735.
 
