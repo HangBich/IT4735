@@ -75,6 +75,13 @@ Hướng 1: bóc tách joint hierachy
 > + humanoid/kinematics/left_arm -> điều khiển robot giơ tay vẫy chào 
 
 
+5. update luồng dữ liệu thật từ camera (vẫn lỗi điều khiển tay trái, tay phải)
+
+> +feat: integrate real-time upper body and dual hand tracking via MediaPipe Holistic
+
+> +feat: connect python computer vision pipeline with mqtt publisher for humanoid teleoperation
+
+> +fix: downgrade mediapipe to v0.10.14 to resolve solution attribute error
 ## TODO
 Hướng 1: Kết nối với Bộ mô phỏng Vật lý (MuJoCo / PyBullet / Isaac Gym)
 Thay vì dùng script Python sinh sóng sin giả lập, chúng ta sẽ viết một script Python khởi tạo một môi trường vật lý thực sự. Khi thuật toán điều khiển (hoặc mô hình Học tăng cường - Reinforcement Learning) tương tác và làm robot chuyển động trong MuJoCo, chúng ta sẽ trích xuất ma trận góc khớp thật đó để bắn qua MQTT, biến giao diện Web thành một Dashboard giám sát mô phỏng thời gian thực.

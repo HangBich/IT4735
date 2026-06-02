@@ -25,37 +25,41 @@ export default function App() {
   const robotRef = useRef(null);
 
   useEffect(() => {
-    // Kết nối tới Broker qua cổng WebSockets
     const client = mqtt.connect('ws://localhost:9001');
-
     client.on('connect', () => {
-      console.log('📡 Đã kết nối MQTT thành công!');
-      // Đăng ký nhận TẤT CẢ dữ liệu động học bằng Wildcard '#'
-      // Cấu trúc mong muốn: humanoid/kinematics/[Tên_Khớp]/[Trục_Xoay]
-      client.subscribe('humanoid/kinematics/#');
+      console.log('📡 Đã kết nối MQTT Broker!');
+      // Đăng ký nghe topic tổng hợp phần thân trên
+      client.subscribe('humanoid/kinematics/upper_body');
     });
 
     client.on('message', (topic, message) => {
-      // Phân tách chuỗi topic thành các mảng chữ
-      // Ví dụ: "humanoid/kinematics/Head/y" -> ['humanoid', 'kinematics', 'Head', 'y']
-      const parts = topic.split('/');
-      
-      if (parts[1] === 'kinematics' && robotRef.current) {
-        const jointName = parts[2]; // Lấy ra tên khớp: VD "Head"
-        const axis = parts[3] || 'y'; // Lấy ra trục xoay: x, y, hoặc z (mặc định là y)
-        const angle = parseFloat(message.toString()); // Lấy góc xoay số thực
+      if (topic === 'humanoid/kinematics/upper_body' && robotRef.current) {
+        try {
+          const data = JSON.parse(message.toString());
+          const jointAngles = data.joints;
 
-        if (!isNaN(angle)) {
-          // DÙNG TOÁN HỌC THREE.JS: Tìm chính xác bộ phận có tên đó trong con robot
-          const joint = robotRef.current.getObjectByName(jointName);
-          
-          if (joint) {
-            // Ép khớp đó xoay quanh trục tương ứng theo thời gian thực!
-            joint.rotation[axis] = angle;
-          }
+          Object.keys(jointAngles).forEach((jointName) => {
+            const joint = robotRef.current.getObjectByName(jointName);
+            if (joint) {
+              // Phân phối trục xoay tối ưu tùy thuộc vào loại khớp
+              if (jointName.includes('Finger')) {
+                // Ngón tay gập theo trục Z
+                joint.rotation.z = jointAngles[jointName];
+              } else if (jointName.includes('UpperArm')) {
+                // Cánh tay trên vung lên xuống theo trục X hoặc Z tùy model, ta thử trục X
+                joint.rotation.x = jointAngles[jointName];
+              } else if (jointName.includes('Forearm')) {
+                // Khủy tay gập duỗi ra trước
+                joint.rotation.y = jointAngles[jointName];
+              }
+            }
+          });
+        } catch (error) {
+          console.error("Lỗi parse JSON:", error);
         }
       }
     });
+
     return () => client.end();
   }, []);
 

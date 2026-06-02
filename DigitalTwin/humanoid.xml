@@ -1,0 +1,28 @@
+<mujoco model="humanoid_twin">
+    <compiler angle="radian" coordinate="local"/>
+    <option timestep="0.01"/>
+
+    <worldbody>
+        <light directional="true" diffuse=".8 .8 .8" specular=".2 .2 .2" pos="0 0 5" dir="0 0 -1"/>
+        <geom type="plane" size="5 5 .1" rgba=".9 .9 .9 1"/>
+
+        <body name="pelvis" pos="0 0 1.2">
+            <geom type="capsule" size="0.1 0.2" rgba="0.8 0.2 0.2 1"/>
+            
+            <body name="head" pos="0 0 0.4">
+                <joint name="ValveBipedBip01_Head1_014" type="hinge" axis="0 1 0" range="-1 1"/>
+                <geom type="sphere" size="0.15" rgba="0.2 0.8 0.2 1"/>
+            </body>
+
+            <body name="left_arm" pos="-0.25 0 0.2">
+                <joint name="ValveBipedBip01_L_UpperArm_017" type="hinge" axis="1 0 0" range="-2 2"/>
+                <geom type="capsule" size="0.05 0.2" fromto="0 0 0 -0.2 0 -0.3" rgba="0.2 0.2 0.8 1"/>
+            </body>
+        </body>
+    </worldbody>
+
+    <actuator>
+        <motor joint="ValveBipedBip01_Head1_014" ctrlrange="-10 10"/>
+        <motor joint="ValveBipedBip01_L_UpperArm_017" ctrlrange="-20 20"/>
+    </actuator>
+</mujoco>
