@@ -84,7 +84,7 @@ Hướng 1: bóc tách joint hierachy
 > +fix: downgrade mediapipe to v0.10.14 to resolve solution attribute error
 ## TODO
 Hướng 1: Kết nối với Bộ mô phỏng Vật lý (MuJoCo / PyBullet / Isaac Gym)
-Thay vì dùng script Python sinh sóng sin giả lập, chúng ta sẽ viết một script Python khởi tạo một môi trường vật lý thực sự. Khi thuật toán điều khiển (hoặc mô hình Học tăng cường - Reinforcement Learning) tương tác và làm robot chuyển động trong MuJoCo, chúng ta sẽ trích xuất ma trận góc khớp thật đó để bắn qua MQTT, biến giao diện Web thành một Dashboard giám sát mô phỏng thời gian thực.
+Thay vì dùng script Python sinh sóng sin giả lập, chúng ta sẽ viết một script Python khởi tạo một môi trường vật lý thực sự. Khi thuật toán điều khiển (hoặc mô hình Học tăng cường - Reinforcement Learning) tương tác và làm robot chuyển động trong MuJoCo, chúng ta sẽ trích xuất ma trận góc khớp thật đó để bắn qua MQTT, biến giao diện Web thành một Dashboard giám sát mô phỏng thời gian thực. (half done)
 
 Hướng 2: Tối ưu hóa cấu trúc gói tin dữ liệu (JSON / MessagePack Serialization)
 Hiện tại chúng ta đang bắn lẻ tẻ từng góc khớp trên các topic riêng biệt. Khi con robot phát triển lên đầy đủ các khớp ngón tay linh khéo (Dexterous Hands) và khớp chân, số lượng topic sẽ bùng nổ lên tới hàng chục. Chúng ta sẽ nâng cấp sang cấu trúc gói tin: Python đóng gói toàn bộ trạng thái góc của tất cả các khớp vào một cấu trúc JSON duy nhất rồi bắn qua một topic chung (ví dụ humanoid/state). Phía React sẽ nhận và phân rã gói tin để cập nhật toàn thân robot trong một khung hình duy nhất.
