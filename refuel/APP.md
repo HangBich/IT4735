@@ -6,6 +6,13 @@
 
 **qr_generator.py** (Tạo link ảnh VietQR)
 
+tạo app - không cần docker 
+
+truy cập qua web - nên dùng docker 
+
+QR vào web app cũng là 1 ý hay 
+
+
 ## Module 1: Xử lý giao tiếp MQTT (mqtt_handler.py)
 Đây là "bộ đàm" của hệ thống. Bạn sẽ dùng thư viện paho-mqtt (pip install paho-mqtt).
 
