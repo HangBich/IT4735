@@ -89,6 +89,9 @@ Thay vì dùng script Python sinh sóng sin giả lập, chúng ta sẽ viết m
 Hướng 2: Tối ưu hóa cấu trúc gói tin dữ liệu (JSON / MessagePack Serialization)
 Hiện tại chúng ta đang bắn lẻ tẻ từng góc khớp trên các topic riêng biệt. Khi con robot phát triển lên đầy đủ các khớp ngón tay linh khéo (Dexterous Hands) và khớp chân, số lượng topic sẽ bùng nổ lên tới hàng chục. Chúng ta sẽ nâng cấp sang cấu trúc gói tin: Python đóng gói toàn bộ trạng thái góc của tất cả các khớp vào một cấu trúc JSON duy nhất rồi bắn qua một topic chung (ví dụ humanoid/state). Phía React sẽ nhận và phân rã gói tin để cập nhật toàn thân robot trong một khung hình duy nhất.
 
+
+Tiếp: cho nhiều con pub hoạt động cùng nhau
+
 _______________________
 ## DEPLOYMENT GUIDE 
 
@@ -119,3 +122,24 @@ python test_publisher.py
 1. **Vật lý hóa hệ thống:** Thay thế script sinh tọa độ toán học hình sin bằng việc nhúng trực tiếp bộ công cụ tính toán vật lý đa vật thể MuJoCo hoặc PyBullet ở tầng Backend.
 
 2. **Tối ưu hóa băng thông (Serialization):** Nâng cấp phương thức truyền tin Plain Text hiện tại sang định dạng nén nhị phân MessagePack hoặc cấu trúc hóa chuỗi JSON để truyền tải toàn bộ trạng thái góc của 30+ khớp nối chỉ trong một gói tin duy nhất.
+
+
+
+
+
+---
+Tiếp:
+1.Sử dụng brocker trên aws 
+2.up web (vercel)
+3.đóng gói python (dockerfile)
+kiến trúc mt
+
+___
+
+timer counter ?? 2048 
+lt ardunino 
+
+wokwwi  (lib)
+
+?? đất phải nối chung ??
+hiệu điện thế ??
