@@ -30,7 +30,21 @@ QR vào web app cũng là 1 ý hay
 
 > Cần tạo một global lock để khi đang bơm không có thiết bị nào khác có thể gửi topic lên nữa 
 
-> ESP32 cần chuyển sang chế độ dang_bơm ngay khi start + khóa giao diện 
+> ESP32 cần chuyển sang chế độ dang_bơm ngay khi start + ignore lenh start khac + khóa giao diện 
+
+**Khóa dao diện**:
+Lớp 2: Khóa giao diện đồng loạt (Dùng cờ Retain của MQTT)
+Đây là lúc Flet và Python thể hiện sức mạnh.
+
+Khi ESP32 bắt đầu bơm, nó không chỉ bật rơ-le, mà còn Publish chữ BUSY lên topic cayxang/trangthai với một tính năng đặc biệt của MQTT gọi là Retained Message (Tin nhắn được giữ lại).
+
+Broker (HiveMQ) sẽ ghim chữ BUSY này lại trên server.
+
+Bất kỳ ai, dù là đứa mới dùng 4G truy cập vào link Web App của bạn ở bất kỳ đâu, ngay giây phút App của họ vừa mở lên và Subscribe vào topic cayxang/trangthai, họ sẽ bị Broker "đập" ngay chữ BUSY vào mặt mà không cần chờ ESP32 gửi lại.
+
+Đoạn code Python của bạn bắt được chữ BUSY, lập tức set button.disabled = True và page.update(). Nút bấm trên tất cả các điện thoại đang mở web đều bị làm mờ (Disable) cùng một lúc.
+
+Khi bơm xong, ESP32 Publish chữ READY (có Retain) đè lên chữ cũ. Lập tức mọi điện thoại đều bắt được và nút bấm sáng trở lại.
 
 ## Module 2: Trình tạo mã thanh toán (qr_generator.py)
 Module này rất ngắn gọn, không cần dùng thư viện phức tạp.
