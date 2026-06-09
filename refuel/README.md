@@ -30,3 +30,6 @@ Quá trình bơm xăng sẽ diễn ra theo dòng thời gian (Timeline) sau:
 
     > App nhận được chữ DONE, lập tức tắt thanh tiến trình bơm, tính tổng tiền và gọi API VietQR để hiện ảnh quét mã thanh toán.
 
+## TÀI LIỆU FRONTEND
+
+https://docs.google.com/document/d/1M_GNZfm3kO8VNdyE1TfxBXfLq4xpuQ5O2cTcudJACpE/edit?usp=sharing
