@@ -28,6 +28,10 @@ QR vào web app cũng là 1 ý hay
 
 > Bắn tín hiệu (Callback): Khi nhận được data từ ESP32 (vd: số lít hiện tại hoặc chữ DONE), module này sẽ "bắn" tín hiệu sang Module UI để cập nhật màn hình.
 
+> Cần tạo một global lock để khi đang bơm không có thiết bị nào khác có thể gửi topic lên nữa 
+
+> ESP32 cần chuyển sang chế độ dang_bơm ngay khi start + khóa giao diện 
+
 ## Module 2: Trình tạo mã thanh toán (qr_generator.py)
 Module này rất ngắn gọn, không cần dùng thư viện phức tạp.
 
