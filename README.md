@@ -10,3 +10,5 @@ Kho lưu trữ toàn bộ bài tập và dự án môn học IT4735.
 ## 🛠️ Hướng dẫn thiết lập môi trường chung
 *   Kích hoạt môi trường ảo: `source .venv/bin/activate`
 *   Cài đặt thư viện: `pip install -r requirements.txt`
+
+
